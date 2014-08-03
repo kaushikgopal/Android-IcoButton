@@ -101,8 +101,7 @@ public class IcoButton
 
         // -----------------------------------------------------------------------------------
         // Button Icon
-        _btnIcon.setImageResource(xmlAttrs.getInt(R.styleable.IcoButton_iconResource,
-                                                  android.R.drawable.ic_input_get));
+        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
         _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
         xmlAttrs.recycle();
     }

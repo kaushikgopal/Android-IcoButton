@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="IcoButton">
-        <attr name="backgroundDrawable" format="integer"/>
+        <attr name="drawable" format="integer"/>
         <attr name="color" format="color"/>
         <attr name="padding" format="dimension"/>
 
-        <attr name="iconResource" format="integer"/>
         <attr name="iconAlign" format="enum">
             <enum name="leftOfText" value="0"/>
             <enum name="rightOfText" value="1"/>

@@ -35,7 +35,7 @@
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        icobutton:text="Button with left ico"
+        icobutton:text="Button with right ico"
         icobutton:iconAlign="right"
         android:layout_margin="4dp"/>
 

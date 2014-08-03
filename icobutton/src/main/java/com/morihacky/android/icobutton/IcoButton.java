@@ -19,16 +19,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.morihacky.android.icobutton.core.IcoButtonViewHelper;
+
+import static com.morihacky.android.icobutton.core.IcoButtonViewHelper.ICON_ALIGN_LEFT_OF_TEXT;
+
 public class IcoButton
     extends ViewGroup {
 
     public static final String HOLO_BLUE = "#ff0099cc";
     public static final String WHITE = "#ffffff";
-    public static int SPACE_BTW_ICON_TXT = 10;
-    public static int ICON_ALIGN_LEFT_OF_TEXT = 0;
-    public static int ICON_ALIGN_RIGHT_OF_TEXT = 1;
-    public static int ICON_ALIGN_LEFT = 2;
-    public static int ICON_ALIGN_RIGHT = 3;
 
     private final Context _context;
     private AttributeSet _attributes;
@@ -36,8 +35,10 @@ public class IcoButton
     private View _btn;
     private TextView _btnText;
     private ImageView _btnIcon;
+    private IcoButtonViewHelper _icoViewHelper;
 
     private int _icoDirection;
+    private int _padding;
 
     public IcoButton(Context context) {
         super(context);
@@ -85,10 +86,8 @@ public class IcoButton
         _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(Color.parseColor(HOLO_BLUE),
                                                                        true));
 
-        int padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding,
-                                                     _convertDpToPixels(8));
-        _btn.setPadding(padding, padding, padding, padding);
-
+        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(8));
+        _btn.setPadding(_padding, _padding, _padding, _padding);
         // -----------------------------------------------------------------------------------
         // Button Text
         _btnText.setText(xmlAttrs.getString(R.styleable.IcoButton_text));
@@ -103,7 +102,6 @@ public class IcoButton
         _btnIcon.setImageResource(xmlAttrs.getInt(R.styleable.IcoButton_iconResource,
                                                   android.R.drawable.ic_input_get));
         _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
-
         xmlAttrs.recycle();
     }
 
@@ -128,69 +126,26 @@ public class IcoButton
         if (changed) {
             _btnIcon.setAdjustViewBounds(true);
             _btnIcon.setMaxHeight(_btnText.getMeasuredHeight());
+
+            _icoViewHelper = new IcoButtonViewHelper();
+            _icoViewHelper.setTotalWidth(getMeasuredWidth());
+            _icoViewHelper.setTotalHeight(getMeasuredHeight());
+            _icoViewHelper.setPadding(_padding);
+
+            _icoViewHelper.setIcoWidth(_btnIcon.getMeasuredWidth());
+            _icoViewHelper.setTextHeight(_btnText.getMeasuredHeight());
+            _icoViewHelper.setTextWidth(_btnText.getMeasuredWidth());
+            _icoViewHelper.setIcoAlign(_icoDirection);
         }
 
-        int iconDistanceFromTop = (getMeasuredHeight() - _btnIcon.getMeasuredHeight()) / 2;
-        int txtDistanceFromTop = (getMeasuredHeight() - _btnText.getMeasuredHeight()) / 2;
-        int contentWidth = _btnIcon.getMeasuredWidth() + _btnIcon.getMeasuredWidth();
-
-        if (_icoDirection == ICON_ALIGN_LEFT_OF_TEXT) {
-            int distanceBtwContentEdgeAndBoundary = (getMeasuredWidth() -
-                                                     (contentWidth + SPACE_BTW_ICON_TXT)) / 2;
-
-            _btnIcon.layout(distanceBtwContentEdgeAndBoundary,
-                            iconDistanceFromTop,
-                            distanceBtwContentEdgeAndBoundary + _btnIcon.getMeasuredWidth(),
-                            iconDistanceFromTop + _btnIcon.getMeasuredHeight());
-            _btnText.layout(distanceBtwContentEdgeAndBoundary +
-                            _btnIcon.getMeasuredWidth() +
-                            SPACE_BTW_ICON_TXT,
-                            txtDistanceFromTop,
-                            getMeasuredWidth() - distanceBtwContentEdgeAndBoundary,
-                            txtDistanceFromTop + _btnText.getMeasuredHeight());
-
-
-        } else if (_icoDirection == ICON_ALIGN_RIGHT_OF_TEXT) {
-            int distanceBtwContentEdgeAndBoundary = (getMeasuredWidth() -
-                                                     (contentWidth + SPACE_BTW_ICON_TXT)) / 2;
-            _btnText.layout(distanceBtwContentEdgeAndBoundary,
-                            txtDistanceFromTop,
-                            distanceBtwContentEdgeAndBoundary + _btnText.getMeasuredWidth(),
-                            txtDistanceFromTop + _btnText.getMeasuredHeight());
-
-            _btnIcon.layout(getMeasuredWidth() -
-                            distanceBtwContentEdgeAndBoundary -
-                            _btnIcon.getMeasuredWidth(),
-                            iconDistanceFromTop,
-                            getMeasuredWidth() - distanceBtwContentEdgeAndBoundary,
-                            iconDistanceFromTop + _btnIcon.getMeasuredHeight());
-
-        } else if (_icoDirection == ICON_ALIGN_LEFT) {
-            int distanceBtwContentEdgeAndBoundary = (getMeasuredWidth() - contentWidth) / 2;
-            _btnText.layout(distanceBtwContentEdgeAndBoundary +
-                            _btnIcon.getMeasuredWidth() +
-                            getPaddingLeft(),
-                            txtDistanceFromTop,
-                            getMeasuredWidth() - distanceBtwContentEdgeAndBoundary,
-                            txtDistanceFromTop + _btnText.getMeasuredHeight());
-
-            _btnIcon.layout(getPaddingLeft(),
-                            iconDistanceFromTop,
-                            getPaddingLeft() + _btnIcon.getMeasuredWidth(),
-                            iconDistanceFromTop + _btnIcon.getMeasuredHeight());
-
-        } else if (_icoDirection == ICON_ALIGN_RIGHT) {
-
-            //            _btnText.layout(distanceBtwContentEdgeAndBoundary,
-            //                            txtDistanceFromTop,
-            //                            distanceBtwContentEdgeAndBoundary + _btnText.getMeasuredWidth(),
-            //                            txtDistanceFromTop + _btnText.getMeasuredHeight());
-            //
-            //            _btnIcon.layout(totalWidth - distanceBtwContentEdgeAndBoundary - _btnIcon.getMeasuredWidth(),
-            //                            iconDistanceFromTop,
-            //                            totalWidth - distanceBtwContentEdgeAndBoundary,
-            //                            iconDistanceFromTop + _btnIcon.getMeasuredHeight());
-        }
+        _btnIcon.layout(_icoViewHelper.getLeftForIcon(),
+                        _icoViewHelper.getTopForIcon(),
+                        _icoViewHelper.getRightForIcon(),
+                        _icoViewHelper.getBottomForIcon());
+        _btnText.layout(_icoViewHelper.getLeftForText(),
+                        _icoViewHelper.getTopForText(),
+                        _icoViewHelper.getRightForText(),
+                        _icoViewHelper.getBottomForText());
     }
 
     /**

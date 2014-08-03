@@ -11,11 +11,19 @@
     tools:context=".DemoActivity"
     xmlns:icobutton="http://schemas.android.com/apk/res-auto">
 
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="Look at ze pretty buttons!"
+        android:layout_margin="4dp"/>
+
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         icobutton:iconAlign="leftOfText"
-        icobutton:txt="Button with ico left of text"
+        icobutton:txt="Icon - left of text"
         icobutton:drawable="@android:drawable/ic_delete"
         android:layout_margin="4dp"/>
 
@@ -23,31 +31,32 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         icobutton:txtSize="18sp"
-        icobutton:color="@android:color/darker_gray"
+        icobutton:color="@android:color/holo_orange_dark"
         icobutton:drawable="@android:drawable/arrow_up_float"
-        icobutton:txt="Button with ico right of text"
+        icobutton:txt="Icon - right of text"
         icobutton:iconAlign="rightOfText"
         android:layout_margin="4dp"/>
 
-    <com.morihacky.android.icobutton.IcoButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        icobutton:txt="Button with right ico"
-        icobutton:drawable="@android:drawable/btn_star_big_off"
-        icobutton:iconAlign="right"
-        android:layout_margin="4dp"/>
-
-    <!--<Button--><!--android:layout_height="wrap_content"--><!--android:layout_width="match_parent"--><!--android:text="Normal Button"--><!--android:drawableRight="@android:drawable/ic_lock_lock"/>-->
 
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         icobutton:drawable="@android:drawable/ic_media_pause"
-        icobutton:txt="Button with left ico"
+        icobutton:txt="Exterme Left"
         icobutton:iconAlign="left"
         android:layout_margin="4dp"/>
 
     <!--<Button--><!--android:layout_height="wrap_content"--><!--android:layout_width="match_parent"--><!--android:text="Normal Button"--><!--android:drawableLeft="@android:drawable/ic_delete"/>-->
+
+    <com.morihacky.android.icobutton.IcoButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        icobutton:txt="Extreme right"
+        icobutton:drawable="@android:drawable/btn_star_big_off"
+        icobutton:iconAlign="right"
+        android:layout_margin="4dp"/>
+
+    <!--<Button--><!--android:layout_height="wrap_content"--><!--android:layout_width="match_parent"--><!--android:text="Normal Button"--><!--android:drawableRight="@android:drawable/ic_lock_lock"/>-->
 
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
@@ -59,18 +68,10 @@
         android:layout_margin="4dp"/>
 
     <com.morihacky.android.icobutton.IcoButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        icobutton:txt="@string/text_from_strings"
-        icobutton:drawable="@android:drawable/stat_sys_warning"
-        icobutton:iconAlign="right"
-        android:layout_margin="4dp"/>
-
-    <com.morihacky.android.icobutton.IcoButton
         android:id="@+id/toggle"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        icobutton:txt="Toggle A (programmatically change text)"
+        icobutton:txt="Toggle (programmatically change text)"
         icobutton:drawable="@android:drawable/stat_sys_warning"
         icobutton:iconAlign="right"
         android:layout_margin="4dp"/>

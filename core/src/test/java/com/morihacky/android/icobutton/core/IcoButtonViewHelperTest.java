@@ -21,9 +21,7 @@ public class IcoButtonViewHelperTest {
         _ico.setTotalHeight(60);
         _ico.setPadding(10);
 
-        _ico.setIcoHeight(40);
         _ico.setIcoWidth(30);
-
         _ico.setTextHeight(30);
         _ico.setTextWidth(100);
     }

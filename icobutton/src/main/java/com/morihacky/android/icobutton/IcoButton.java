@@ -11,7 +11,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.StateSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -67,6 +66,8 @@ public class IcoButton
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        _checkForNestedXmlViews();
+
         measureChild(_btnIcon, widthMeasureSpec, heightMeasureSpec);
         measureChild(_btnText, widthMeasureSpec, heightMeasureSpec);
 
@@ -112,6 +113,45 @@ public class IcoButton
         return false;
     }
 
+    private void _checkForNestedXmlViews() {
+        // No nested views
+        if (getChildCount() == 2) {
+            return;
+        }
+
+        // More than 2 nested views
+        if (getChildCount() > 4) {
+            throw new IllegalArgumentException("We already have an EditText, can only have one");
+        }
+
+        View firstView = getChildAt(2);
+        if (!(firstView instanceof TextView) && !(firstView instanceof ImageView)) {
+            throw new IllegalArgumentException("Only TextView and ImageView supported");
+        }
+
+        if (firstView instanceof TextView) {
+            _btnText = (TextView) firstView;
+
+        } else {
+            _btnIcon = (ImageView) firstView;
+        }
+
+        if (getChildCount() == 3) {
+            return;
+        }
+
+        View secondView = getChildAt(3);
+        if (!(secondView instanceof TextView) && !(secondView instanceof ImageView)) {
+            throw new IllegalArgumentException("Only TextView and ImageView supported");
+        }
+
+        if (secondView instanceof TextView) {
+            _btnText = (TextView) secondView;
+        } else {
+            _btnIcon = (ImageView) secondView;
+        }
+    }
+
     private void _initializeView() {
         if (_context == null) {
             return;
@@ -141,11 +181,6 @@ public class IcoButton
         xmlAttrs.recycle();
     }
 
-    private void _setupButtonIcon(TypedArray xmlAttrs) {
-        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
-        _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
-    }
-
     private void _setupButton(TypedArray xmlAttrs) {
         _btn.setClickable(true);
 
@@ -154,6 +189,11 @@ public class IcoButton
 
         _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(10));
         _btn.setPadding(_padding, _padding, _padding, _padding);
+    }
+
+    private void _setupButtonIcon(TypedArray xmlAttrs) {
+        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
+        _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
     }
 
     private void _setupButtonText(TypedArray xmlAttrs) {

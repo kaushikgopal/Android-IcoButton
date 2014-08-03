@@ -37,11 +37,7 @@
         icobutton:iconAlign="right"
         android:layout_margin="4dp"/>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Normal Button"
-        android:drawableRight="@android:drawable/ic_lock_lock"/>
+    <!--<Button--><!--android:layout_height="wrap_content"--><!--android:layout_width="match_parent"--><!--android:text="Normal Button"--><!--android:drawableRight="@android:drawable/ic_lock_lock"/>-->
 
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
@@ -51,11 +47,7 @@
         icobutton:iconAlign="left"
         android:layout_margin="4dp"/>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Normal Button"
-        android:drawableLeft="@android:drawable/ic_delete"/>
+    <!--<Button--><!--android:layout_height="wrap_content"--><!--android:layout_width="match_parent"--><!--android:text="Normal Button"--><!--android:drawableLeft="@android:drawable/ic_delete"/>-->
 
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
@@ -70,6 +62,15 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         icobutton:txt="@string/text_from_strings"
+        icobutton:drawable="@android:drawable/stat_sys_warning"
+        icobutton:iconAlign="right"
+        android:layout_margin="4dp"/>
+
+    <com.morihacky.android.icobutton.IcoButton
+        android:id="@+id/toggle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        icobutton:txt="Toggle A (programmatically change text)"
         icobutton:drawable="@android:drawable/stat_sys_warning"
         icobutton:iconAlign="right"
         android:layout_margin="4dp"/>

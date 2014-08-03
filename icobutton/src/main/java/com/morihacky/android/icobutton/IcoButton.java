@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.StateSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -60,6 +61,10 @@ public class IcoButton
         _initializeView();
     }
 
+    public void setText(String text) {
+        _btnText.setText(text);
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         measureChild(_btnIcon, widthMeasureSpec, heightMeasureSpec);
@@ -79,16 +84,15 @@ public class IcoButton
             _btnIcon.setAdjustViewBounds(true);
             _btnIcon.setMaxHeight(_btnText.getMeasuredHeight());
 
-            _icoViewHelper = new IcoButtonViewHelper();
             _icoViewHelper.setTotalWidth(getMeasuredWidth());
             _icoViewHelper.setTotalHeight(getMeasuredHeight());
             _icoViewHelper.setPadding(_padding);
 
             _icoViewHelper.setIcoWidth(_btnIcon.getMeasuredWidth());
             _icoViewHelper.setTextHeight(_btnText.getMeasuredHeight());
-            _icoViewHelper.setTextWidth(_btnText.getMeasuredWidth());
             _icoViewHelper.setIcoAlign(_icoDirection);
         }
+        _icoViewHelper.setTextWidth(_btnText.getMeasuredWidth());
 
         _btnIcon.layout(_icoViewHelper.getLeftForIcon(),
                         _icoViewHelper.getTopForIcon(),
@@ -127,6 +131,8 @@ public class IcoButton
         if (xmlAttrs == null) {
             return;
         }
+
+        _icoViewHelper = new IcoButtonViewHelper();
 
         _setupButton(xmlAttrs);
         _setupButtonText(xmlAttrs);

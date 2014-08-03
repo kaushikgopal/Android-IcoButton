@@ -1,19 +1,20 @@
 package com.morihacky.android.icobutton.sample;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.morihacky.android.icobutton.IcoButton;
 
-public class DemoActivity extends ActionBarActivity {
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demo);
-    }
 
+public class DemoActivity
+    extends ActionBarActivity {
+
+    boolean toggleAIndicator = false;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +33,22 @@ public class DemoActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.toggle)
+    public void onToggle(IcoButton btn) {
+        if (toggleAIndicator) {
+            btn.setText("Toggle A");
+        } else {
+            btn.setText("Toggle B");
+        }
+        toggleAIndicator = !toggleAIndicator;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_demo);
+        ButterKnife.inject(this);
     }
 }

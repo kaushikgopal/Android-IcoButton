@@ -147,7 +147,6 @@ public class IcoButtonViewHelperTest {
         _ico.setTotalWidth(200);
         _ico.setIcoAlign(ICON_ALIGN_LEFT);
         assertThat(_ico.getLeftForText()).isEqualTo(70);
-
     }
 
 /*     |----------------------  500 -------------------------------------|
@@ -188,5 +187,17 @@ public class IcoButtonViewHelperTest {
         _ico.setTotalWidth(160);
         _ico.setIcoAlign(ICON_ALIGN_RIGHT);
         assertThat(_ico.getLeftForText()).isEqualTo(10);
+    }
+
+    @Test
+    public void horizontalCoordinatesForText_ShouldBeCorrect_ForTypicalCase1() {
+        // as observed on sample
+        _ico.setTotalWidth(960);
+        _ico.setTextWidth(430);
+        _ico.setIcoWidth(96);
+        _ico.setPadding(24);
+        _ico.setIcoAlign(ICON_ALIGN_RIGHT);
+
+        assertThat(_ico.getLeftForText()).isEqualTo(265);
     }
 }

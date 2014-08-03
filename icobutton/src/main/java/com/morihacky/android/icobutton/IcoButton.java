@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.StateSet;
@@ -62,6 +63,10 @@ public class IcoButton
 
     public void setText(String text) {
         _btnText.setText(text);
+    }
+
+    public void setIcon(Drawable icon) {
+        _btnIcon.setImageDrawable(icon);
     }
 
     @Override

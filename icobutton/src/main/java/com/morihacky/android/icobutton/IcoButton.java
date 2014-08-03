@@ -209,8 +209,9 @@ public class IcoButton
         return Color.HSVToColor(hsv);
     }
 
-    private int _convertDpToPixels(int dpSize) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (dpSize * scale + 0.5f);
+    private int _convertDpToPixels(int dps) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                                               dps,
+                                               getResources().getDisplayMetrics());
     }
 }

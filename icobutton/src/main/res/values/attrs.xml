@@ -12,8 +12,8 @@
             <enum name="right" value="3"/>
         </attr>
 
-        <attr name="text" format="string"/>
-        <attr name="textColor" format="color"/>
-        <attr name="textSize" format="dimension"/>
+        <attr name="txt" format="string"/>
+        <attr name="txtSize" format="dimension"/>
+        <attr name="txtColor" format="color"/>
     </declare-styleable>
 </resources>

@@ -92,11 +92,11 @@ public class IcoButton
 
         // -----------------------------------------------------------------------------------
         // Button Text
-        _btnText.setText(xmlAttrs.getString(R.styleable.IcoButton_text));
-        _btnText.setTextColor(xmlAttrs.getColor(R.styleable.IcoButton_textColor,
+        _btnText.setText(xmlAttrs.getString(R.styleable.IcoButton_txt));
+        _btnText.setTextColor(xmlAttrs.getColor(R.styleable.IcoButton_txtColor,
                                                 Color.parseColor(WHITE)));
         _btnText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                             xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_textSize,
+                             xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_txtSize,
                                                             _convertDpToPixels(16)));
 
         // -----------------------------------------------------------------------------------

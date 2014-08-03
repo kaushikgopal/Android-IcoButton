@@ -12,3 +12,11 @@ Using a Relativelayout for a button seems like killing a fly with a sword, so I 
 5. Super readable code!
 
 I've covered most of the predominant cases that I required for my project. If you find a case that's not covered, feel free to send in a pull request. This project was built with the intention of allowing people to quickly dive-in to the code, possibly write a test case if things are behavingly wierdly, patch the code and send it up to everyone.
+
+
+## Button defaults:
+
+1. textSize - 16dp
+2. padding - 8dp (on all sides)
+3. backgroundColor - Holo Blue ("#ff0099cc")
+4. textColor - (white)

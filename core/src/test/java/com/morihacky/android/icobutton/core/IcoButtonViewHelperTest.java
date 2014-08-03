@@ -146,7 +146,7 @@ public class IcoButtonViewHelperTest {
 
         _ico.setTotalWidth(200);
         _ico.setIcoAlign(ICON_ALIGN_LEFT);
-        assertThat(_ico.getLeftForText()).isEqualTo(70);
+        assertThat(_ico.getLeftForText()).isEqualTo(50);
     }
 
 /*     |----------------------  500 -------------------------------------|
@@ -163,9 +163,9 @@ public class IcoButtonViewHelperTest {
        |_________________________________________________________________|                       |
                                                                                                 ---
                         |------- 100 --------|              |-- 30 --|
-       |10|                                                           |10|
+       |10|                                             |10|         |10|
 
-       |------200-------|                     |-------- 200 -------------|
+      |----- 200 -------|                     |--------  200  ----------|
 */
 
     @Test
@@ -179,7 +179,7 @@ public class IcoButtonViewHelperTest {
     public void horizontalCoordinatesForText_ShouldBeCorrect_WhenIconAlignmentIsIconAlignRight() {
         _ico.setIcoAlign(ICON_ALIGN_RIGHT);
         assertThat(_ico.getLeftForText()).isEqualTo(200);
-        assertThat(_ico.getRightForText()).isEqualTo(300);
+        assertThat(_ico.getRightForText()).isEqualTo(200 + 100);
     }
 
     @Test

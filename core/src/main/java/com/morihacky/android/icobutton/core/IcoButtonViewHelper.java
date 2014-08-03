@@ -72,25 +72,23 @@ public class IcoButtonViewHelper {
             return (_totalWidth - _icoWidth - _textWidth - SPACE_BTW_ICON_TXT) / 2;
         }
 
-        int baseMinimumWidth = 2 * _padding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
-        int normalCoordinate = (_totalWidth - _textWidth) / 2;
-        int constrainedCoordinate = (_totalWidth - baseMinimumWidth) / 2 +
-                                    _icoWidth +
-                                    SPACE_BTW_ICON_TXT +
-                                    _padding;
+        int desiredSpace = (_totalWidth - _textWidth) / 2;
 
         if (_icoDirection == ICON_ALIGN_LEFT) {
-            if (normalCoordinate > baseMinimumWidth) {
-                return normalCoordinate;
+            int minSpaceRequiredOnLeft = _padding + _icoWidth + SPACE_BTW_ICON_TXT;
+            if (desiredSpace < minSpaceRequiredOnLeft) {
+                return minSpaceRequiredOnLeft;
             }
-            return constrainedCoordinate;
+            return desiredSpace;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT) {
-            if (normalCoordinate > baseMinimumWidth) {
-                return normalCoordinate;
+            int minSpaceRequiredOnRight = _padding + SPACE_BTW_ICON_TXT + _icoWidth;
+            if (desiredSpace > minSpaceRequiredOnRight) {
+                return desiredSpace;
             }
-            return _padding;
+
+            return (_totalWidth - minSpaceRequiredOnRight - _padding - _textWidth) / 2 + _padding;
         }
 
         // if (_icoDirection == ICON_ALIGN_LEFT_OF_TEXT) {

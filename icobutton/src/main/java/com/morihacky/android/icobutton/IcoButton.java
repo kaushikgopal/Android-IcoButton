@@ -60,55 +60,6 @@ public class IcoButton
         _initializeView();
     }
 
-    private void _initializeView() {
-        if (_context == null) {
-            return;
-        }
-
-        _btn = LayoutInflater.from(_context)
-                             .inflate(R.layout.com_morihacky_android_icobutton, this, true);
-
-        _btnText = (TextView) findViewById(R.id.com_morihacky_android_icobutton_text);
-        _btnIcon = (ImageView) findViewById(R.id.com_morihacky_android_icobutton_icon);
-
-        _setupView();
-    }
-
-    private void _setupView() {
-        TypedArray xmlAttrs = _context.obtainStyledAttributes(_attributes, R.styleable.IcoButton);
-        if (xmlAttrs == null) {
-            return;
-        }
-
-        // -----------------------------------------------------------------------------------
-        // Button
-        _btn.setClickable(true);
-
-        int color = xmlAttrs.getColor(R.styleable.IcoButton_color, Color.parseColor(HOLO_BLUE));
-        _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(color, true));
-
-        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(10));
-        _btn.setPadding(_padding, _padding, _padding, _padding);
-
-        // -----------------------------------------------------------------------------------
-        // Button Text
-        _btnText.setText(xmlAttrs.getString(R.styleable.IcoButton_txt));
-        _btnText.setTextColor(xmlAttrs.getColor(R.styleable.IcoButton_txtColor,
-                                                Color.parseColor(WHITE)));
-        _btnText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                             xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_txtSize,
-                                                            _convertDpToPixels(16)));
-
-        // -----------------------------------------------------------------------------------
-        // Button Icon
-        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
-        _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
-        xmlAttrs.recycle();
-    }
-
-    // -----------------------------------------------------------------------
-    // Custom ViewGroup implementation
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         measureChild(_btnIcon, widthMeasureSpec, heightMeasureSpec);
@@ -155,6 +106,63 @@ public class IcoButton
     @Override
     public boolean shouldDelayChildPressedState() {
         return false;
+    }
+
+    private void _initializeView() {
+        if (_context == null) {
+            return;
+        }
+
+        _btn = LayoutInflater.from(_context)
+                             .inflate(R.layout.com_morihacky_android_icobutton, this, true);
+
+        _btnText = (TextView) findViewById(R.id.com_morihacky_android_icobutton_text);
+        _btnIcon = (ImageView) findViewById(R.id.com_morihacky_android_icobutton_icon);
+
+        _setupView();
+    }
+
+    private void _setupView() {
+        TypedArray xmlAttrs = _context.obtainStyledAttributes(_attributes, R.styleable.IcoButton);
+        if (xmlAttrs == null) {
+            return;
+        }
+
+        _setupButton(xmlAttrs);
+        _setupButtonText(xmlAttrs);
+        _setupButtonIcon(xmlAttrs);
+
+        xmlAttrs.recycle();
+    }
+
+    private void _setupButtonIcon(TypedArray xmlAttrs) {
+        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
+        _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
+    }
+
+    private void _setupButton(TypedArray xmlAttrs) {
+        _btn.setClickable(true);
+
+        int color = xmlAttrs.getColor(R.styleable.IcoButton_color, Color.parseColor(HOLO_BLUE));
+        _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(color, true));
+
+        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(10));
+        _btn.setPadding(_padding, _padding, _padding, _padding);
+    }
+
+    private void _setupButtonText(TypedArray xmlAttrs) {
+        boolean allCaps = xmlAttrs.getBoolean(R.styleable.IcoButton_txtAllCaps, false);
+        String btnText = xmlAttrs.getString(R.styleable.IcoButton_txt);
+        if (allCaps) {
+            btnText = btnText.toUpperCase();
+        }
+
+        _btnText.setText(btnText);
+        _btnText.setTextColor(xmlAttrs.getColor(R.styleable.IcoButton_txtColor,
+                                                Color.parseColor(WHITE)));
+        _btnText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                             xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_txtSize,
+                                                            _convertDpToPixels(16)));
     }
 
     private StateListDrawable _getStateListDrawableForButtonColor(int buttonColor, boolean darken) {

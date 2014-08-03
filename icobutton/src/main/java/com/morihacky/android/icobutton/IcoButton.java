@@ -83,11 +83,13 @@ public class IcoButton
         // -----------------------------------------------------------------------------------
         // Button
         _btn.setClickable(true);
-        _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(Color.parseColor(HOLO_BLUE),
-                                                                       true));
 
-        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(8));
+        int color = xmlAttrs.getColor(R.styleable.IcoButton_color, Color.parseColor(HOLO_BLUE));
+        _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(color, true));
+
+        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(10));
         _btn.setPadding(_padding, _padding, _padding, _padding);
+
         // -----------------------------------------------------------------------------------
         // Button Text
         _btnText.setText(xmlAttrs.getString(R.styleable.IcoButton_text));
@@ -165,9 +167,8 @@ public class IcoButton
                                                  rectNormal.height(),
                                                  Bitmap.Config.ARGB_8888);
         Canvas canvasNormal = new Canvas(imageNormal);
-        int colorNormal = buttonColor;
         Paint paintNormal = new Paint();
-        paintNormal.setColor(colorNormal);
+        paintNormal.setColor(buttonColor);
         canvasNormal.drawRect(rectNormal, paintNormal);
 
         // -----------------------------------------------------------------------------------
@@ -178,7 +179,7 @@ public class IcoButton
                                                   rectPressed.height(),
                                                   Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(imagePressed);
-        int colorPressed = _darkenOrLightenColor(colorNormal, darken);
+        int colorPressed = _darkenOrLightenColor(buttonColor, darken);
         Paint paintPressed = new Paint();
         paintPressed.setColor(colorPressed);
         canvas.drawRect(rectPressed, paintPressed);
@@ -201,7 +202,7 @@ public class IcoButton
 
         // value component
         if (darken) {
-            hsv[2] *= Math.max(hsv[2] * 0.99f, 0);
+            hsv[2] *= Math.max(hsv[2] * 0.8f, 0);
         } else {
             hsv[2] = Math.max(hsv[2] * 1.5f, 1);
         }

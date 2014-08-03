@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="IcoButton">
         <attr name="backgroundDrawable" format="integer"/>
-        <attr name="backgroundColor" format="color"/>
+        <attr name="color" format="color"/>
         <attr name="padding" format="dimension"/>
 
         <attr name="iconResource" format="integer"/>

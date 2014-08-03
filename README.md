@@ -17,6 +17,6 @@ I've covered most of the predominant cases that I required for my project. If yo
 ## Button defaults:
 
 1. textSize - 16dp
-2. padding - 8dp (on all sides)
+2. padding - 10dp (for all sides)
 3. backgroundColor - Holo Blue ("#ff0099cc")
 4. textColor - (white)

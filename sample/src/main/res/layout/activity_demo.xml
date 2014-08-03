@@ -21,15 +21,10 @@
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        icobutton:textSize="18sp"
+        icobutton:color="@android:color/holo_red_dark"
         icobutton:text="Button with ico right of text"
         icobutton:iconAlign="rightOfText"
-        android:layout_margin="4dp"/>
-
-    <com.morihacky.android.icobutton.IcoButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        icobutton:text="Button with left ico"
-        icobutton:iconAlign="left"
         android:layout_margin="4dp"/>
 
     <com.morihacky.android.icobutton.IcoButton
@@ -43,6 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Normal Button"/>
+
+    <com.morihacky.android.icobutton.IcoButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        icobutton:text="Button with left ico"
+        icobutton:iconAlign="left"
+        android:layout_margin="4dp"/>
 
     <Button
         android:layout_height="wrap_content"

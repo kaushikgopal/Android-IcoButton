@@ -40,8 +40,8 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:drawableRight="@android:drawable/ic_lock_lock"
-        android:text="Normal Button"/>
+        android:text="Normal Button"
+        android:drawableRight="@android:drawable/ic_lock_lock"/>
 
     <com.morihacky.android.icobutton.IcoButton
         android:layout_height="wrap_content"
@@ -57,5 +57,21 @@
         android:text="Normal Button"
         android:drawableLeft="@android:drawable/ic_delete"/>
 
+    <com.morihacky.android.icobutton.IcoButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        icobutton:txt="look ma, all caps!"
+        icobutton:txtAllCaps="true"
+        icobutton:drawable="@android:drawable/stat_sys_warning"
+        icobutton:iconAlign="right"
+        android:layout_margin="4dp"/>
+
+    <com.morihacky.android.icobutton.IcoButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        icobutton:txt="@string/text_from_strings"
+        icobutton:drawable="@android:drawable/stat_sys_warning"
+        icobutton:iconAlign="right"
+        android:layout_margin="4dp"/>
 
 </LinearLayout>

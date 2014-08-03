@@ -39,8 +39,10 @@ public class DemoActivity
     public void onToggle(IcoButton btn) {
         if (toggleAIndicator) {
             btn.setText("Toggle A");
+            btn.setIcon(getResources().getDrawable(android.R.drawable.checkbox_on_background));
         } else {
             btn.setText("Toggle B");
+            btn.setIcon(getResources().getDrawable(android.R.drawable.checkbox_off_background));
         }
         toggleAIndicator = !toggleAIndicator;
     }

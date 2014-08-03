@@ -71,7 +71,7 @@
         android:id="@+id/toggle"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        icobutton:txt="Toggle (programmatically change text)"
+        icobutton:txt="Toggle values (resizes correctly)"
         icobutton:drawable="@android:drawable/stat_sys_warning"
         icobutton:iconAlign="right"
         android:layout_margin="4dp"/>

@@ -1,1 +1,1 @@
-include ':sample', ':icobutton'
+include ':sample', ':icobutton', ':core'

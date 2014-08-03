@@ -6,9 +6,11 @@
         <attr name="padding" format="dimension"/>
 
         <attr name="iconResource" format="integer"/>
-        <attr name="iconDirection" format="enum">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
+        <attr name="iconAlign" format="enum">
+            <enum name="leftOfText" value="0"/>
+            <enum name="rightOfText" value="1"/>
+            <enum name="left" value="2"/>
+            <enum name="right" value="3"/>
         </attr>
 
         <attr name="text" format="string"/>

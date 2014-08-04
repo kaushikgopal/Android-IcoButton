@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 20
-        versionCode 1
-        versionName "1.0"
     }
 
     packagingOptions {
@@ -27,6 +25,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
 }
 
 apply from: '../maven_push.gradle'

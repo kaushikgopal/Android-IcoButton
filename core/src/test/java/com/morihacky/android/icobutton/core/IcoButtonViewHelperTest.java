@@ -102,24 +102,24 @@ public class IcoButtonViewHelperTest {
     }
 
 
-    /*
-           |------------------- -------  500 -------------------------|
-            ___________________ ______________________________________                       ---
-           |                                                          |                       |
-           |    ________                                              |           ---         |
-           |   |        |         _____________________               |    ---     |          |
-           |   |        |        |                     |              |     |      |          |
-           |   |  ICON  |        |        TEXT         |              |     30     40         |
-           |   |        |        |                     |              |     |      |          60
-           |   |        |        |_____________________|              |    ---     |          |
-           |   |________|                                             |           ---         |
-           |                                                          |                       |
-           |__________________________________________________________|                       |
-                                                                                             ---
-               |-- 30 --|        |------- 100 --------|
-           |10|                                                    |10|
-           |------   200 --------|                    |----- 200 -----|
-    */
+/*
+     |--------------------------- 500 -----------------|
+      __________________________________________________                   ---
+     |                                                 |                    |
+     |    ________                                     |           ---      |
+     |   |        |           ______________           |    ---     |       |
+     |   |        |          |              |          |     |      |       |
+     |   |  ICON  |          |     TEXT     |          |     30     40      |
+     |   |        |          |              |          |     |      |       60
+     |   |        |          |______________|          |    ---     |       |
+     |   |________|                                    |           ---      |
+     |                                                 |                    |
+     |_________________________________________________|                    |
+                                                                           ---
+         |-- 30 --|          |---- 100 ----|
+     |10|         |10|                              |10|
+                     |--170--|             |--170--|
+*/
     @Test
     public void horizontalCoordinatesForIcon_ShouldBeCorrect_WhenIconAlignmentIsIconAlignLeft() {
         _ico.setIcoAlign(ICON_ALIGN_LEFT);
@@ -130,8 +130,8 @@ public class IcoButtonViewHelperTest {
     @Test
     public void horizontalCoordinatesForText_ShouldBeCorrect_WhenIconAlignmentIsIconAlignLeft() {
         _ico.setIcoAlign(ICON_ALIGN_LEFT);
-        assertThat(_ico.getLeftForText()).isEqualTo(200);
-        assertThat(_ico.getRightForText()).isEqualTo(300);
+        assertThat(_ico.getLeftForText()).isEqualTo(220);
+        assertThat(_ico.getRightForText()).isEqualTo(320);
     }
 
     @Test
@@ -146,26 +146,26 @@ public class IcoButtonViewHelperTest {
 
         _ico.setTotalWidth(200);
         _ico.setIcoAlign(ICON_ALIGN_LEFT);
-        assertThat(_ico.getLeftForText()).isEqualTo(50);
+        assertThat(_ico.getLeftForText()).isEqualTo(70);
     }
 
-/*     |----------------------  500 -------------------------------------|
-        _________________________________________________________________                       ---
-       |                                                                 |                       |
-       |                                                     ________    |           ---         |
-       |                 _____________________              |        |   |    ---     |          |
-       |                |                     |             |        |   |     |      |          |
-       |                |        TEXT         |             |  ICON  |   |     30     40         |
-       |                |                     |             |        |   |     |      |          60
-       |                |_____________________|             |        |   |    ---     |          |
-       |                                                    |________|   |           ---         |
-       |                                                                 |                       |
-       |_________________________________________________________________|                       |
-                                                                                                ---
-                        |------- 100 --------|              |-- 30 --|
-       |10|                                             |10|         |10|
+/*     |--------------------  500 --------------------------|
+        ____________________________________________________                    ---
+       |                                                    |                    |
+       |                                        ________    |           ---      |
+       |            ______________             |        |   |    ---     |       |
+       |           |              |            |        |   |     |      |       |
+       |           |     TEXT     |            |  ICON  |   |     30     40      |
+       |           |              |            |        |   |     |      |       60
+       |           |______________|            |        |   |    ---     |       |
+       |                                       |________|   |           ---      |
+       |                                                    |                    |
+       |____________________________________________________|                    |
+                                                                                ---
+                   |---- 100 ----|             |-- 30 --|
+       |10|                                |10|         |10|
 
-      |----- 200 -------|                     |--------  200  ----------|
+           |--170--|              |--170--|
 */
 
     @Test
@@ -178,8 +178,8 @@ public class IcoButtonViewHelperTest {
     @Test
     public void horizontalCoordinatesForText_ShouldBeCorrect_WhenIconAlignmentIsIconAlignRight() {
         _ico.setIcoAlign(ICON_ALIGN_RIGHT);
-        assertThat(_ico.getLeftForText()).isEqualTo(200);
-        assertThat(_ico.getRightForText()).isEqualTo(200 + 100);
+        assertThat(_ico.getLeftForText()).isEqualTo(180);
+        assertThat(_ico.getRightForText()).isEqualTo(180 + 100);
     }
 
     @Test
@@ -187,17 +187,5 @@ public class IcoButtonViewHelperTest {
         _ico.setTotalWidth(160);
         _ico.setIcoAlign(ICON_ALIGN_RIGHT);
         assertThat(_ico.getLeftForText()).isEqualTo(10);
-    }
-
-    @Test
-    public void horizontalCoordinatesForText_ShouldBeCorrect_ForTypicalCase1() {
-        // as observed on sample
-        _ico.setTotalWidth(960);
-        _ico.setTextWidth(430);
-        _ico.setIcoWidth(96);
-        _ico.setPadding(24);
-        _ico.setIcoAlign(ICON_ALIGN_RIGHT);
-
-        assertThat(_ico.getLeftForText()).isEqualTo(265);
     }
 }

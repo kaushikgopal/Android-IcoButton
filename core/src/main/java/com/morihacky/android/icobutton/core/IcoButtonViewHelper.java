@@ -51,12 +51,15 @@ public class IcoButtonViewHelper {
     }
 
     public int getLeftForIcon() {
+        int minContentSpaceRequired = 2 * _padding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
+        int spaceLeft = _totalWidth - minContentSpaceRequired;
+
         if (_icoDirection == ICON_ALIGN_LEFT) {
             return _padding;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT) {
-            return _totalWidth - _padding - _icoWidth;
+            return _padding + spaceLeft + _textWidth + SPACE_BTW_ICON_TXT;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT_OF_TEXT) {
@@ -68,27 +71,19 @@ public class IcoButtonViewHelper {
     }
 
     public int getLeftForText() {
+        int minContentSpaceRequired = 2 * _padding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
+        int spaceLeft = _totalWidth - minContentSpaceRequired;
+
         if (_icoDirection == ICON_ALIGN_RIGHT_OF_TEXT) {
             return (_totalWidth - _icoWidth - _textWidth - SPACE_BTW_ICON_TXT) / 2;
         }
 
-        int desiredSpace = (_totalWidth - _textWidth) / 2;
-
         if (_icoDirection == ICON_ALIGN_LEFT) {
-            int minSpaceRequiredOnLeft = _padding + _icoWidth + SPACE_BTW_ICON_TXT;
-            if (desiredSpace < minSpaceRequiredOnLeft) {
-                return minSpaceRequiredOnLeft;
-            }
-            return desiredSpace;
+            return _padding + _icoWidth + SPACE_BTW_ICON_TXT +  spaceLeft/2;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT) {
-            int minSpaceRequiredOnRight = _padding + SPACE_BTW_ICON_TXT + _icoWidth;
-            if (desiredSpace > minSpaceRequiredOnRight) {
-                return desiredSpace;
-            }
-
-            return (_totalWidth - minSpaceRequiredOnRight - _padding - _textWidth) / 2 + _padding;
+            return _padding + spaceLeft / 2;
         }
 
         // if (_icoDirection == ICON_ALIGN_LEFT_OF_TEXT) {

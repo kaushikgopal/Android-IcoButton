@@ -39,7 +39,7 @@ public class IcoButton
     private IcoButtonViewHelper _icoViewHelper;
 
     private int _icoDirection;
-    private int _padding;
+    private int _hpadding, _vpadding;
 
     public IcoButton(Context context) {
         super(context);
@@ -92,7 +92,8 @@ public class IcoButton
 
             _icoViewHelper.setTotalWidth(getMeasuredWidth());
             _icoViewHelper.setTotalHeight(getMeasuredHeight());
-            _icoViewHelper.setPadding(_padding);
+            _icoViewHelper.setHorizontalPadding(_hpadding);
+            _icoViewHelper.setVerticalPadding(_vpadding);
 
             _icoViewHelper.setIcoWidth(_btnIcon.getMeasuredWidth());
             _icoViewHelper.setTextHeight(_btnText.getMeasuredHeight());
@@ -192,8 +193,11 @@ public class IcoButton
         int color = xmlAttrs.getColor(R.styleable.IcoButton_color, Color.parseColor(HOLO_BLUE));
         _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(color, true));
 
-        _padding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_padding, _convertDpToPixels(10));
-        _btn.setPadding(_padding, _padding, _padding, _padding);
+        _hpadding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_hpadding,
+                                                   _convertDpToPixels(10));
+        _vpadding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_vpadding,
+                                                   _convertDpToPixels(10));
+        _btn.setPadding(_hpadding, _vpadding, _hpadding, _vpadding);
     }
 
     private void _setupButtonIcon(TypedArray xmlAttrs) {

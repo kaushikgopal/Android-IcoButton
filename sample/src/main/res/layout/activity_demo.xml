@@ -106,7 +106,8 @@
             android:layout_weight="1"
             icobutton:txt="Button 1"
             icobutton:drawable="@android:drawable/stat_sys_warning"
-            icobutton:iconAlign="right"
+            icobutton:iconAlign="leftOfText"
+            icobutton:hpadding="4dp"
             android:layout_margin="4dp"/>
 
         <com.morihacky.android.icobutton.IcoButton

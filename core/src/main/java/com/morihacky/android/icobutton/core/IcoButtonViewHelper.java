@@ -15,10 +15,14 @@ public class IcoButtonViewHelper {
     private int _textWidth;
     private int _textHeight;
     private int _icoDirection;
-    private int _padding;
+    private int _hpadding, _vpadding;
 
-    public void setPadding(int padding) {
-        _padding = padding;
+    public void setHorizontalPadding(int padding) {
+        _hpadding = padding;
+    }
+
+    public void setVerticalPadding(int padding) {
+        _vpadding = padding;
     }
 
     public void setIcoAlign(int icoDirection) {
@@ -51,15 +55,15 @@ public class IcoButtonViewHelper {
     }
 
     public int getLeftForIcon() {
-        int minContentSpaceRequired = 2 * _padding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
+        int minContentSpaceRequired = 2 * _hpadding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
         int spaceLeft = _totalWidth - minContentSpaceRequired;
 
         if (_icoDirection == ICON_ALIGN_LEFT) {
-            return _padding;
+            return _hpadding;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT) {
-            return _padding + spaceLeft + _textWidth + SPACE_BTW_ICON_TXT;
+            return _hpadding + spaceLeft + _textWidth + SPACE_BTW_ICON_TXT;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT_OF_TEXT) {
@@ -71,7 +75,7 @@ public class IcoButtonViewHelper {
     }
 
     public int getLeftForText() {
-        int minContentSpaceRequired = 2 * _padding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
+        int minContentSpaceRequired = 2 * _hpadding + SPACE_BTW_ICON_TXT + _icoWidth + _textWidth;
         int spaceLeft = _totalWidth - minContentSpaceRequired;
 
         if (_icoDirection == ICON_ALIGN_RIGHT_OF_TEXT) {
@@ -79,15 +83,15 @@ public class IcoButtonViewHelper {
         }
 
         if (_icoDirection == ICON_ALIGN_LEFT) {
-            return _padding + _icoWidth + SPACE_BTW_ICON_TXT +  spaceLeft/2;
+            return _hpadding + _icoWidth + SPACE_BTW_ICON_TXT + spaceLeft / 2;
         }
 
         if (_icoDirection == ICON_ALIGN_RIGHT) {
-            return _padding + spaceLeft / 2;
+            return _hpadding + spaceLeft / 2;
         }
 
         // if (_icoDirection == ICON_ALIGN_LEFT_OF_TEXT) {
-        return getRightForIcon() + _padding;
+        return getRightForIcon() + SPACE_BTW_ICON_TXT;
     }
 
 

@@ -95,4 +95,30 @@
             android:text="nestled inside another view"/>
     </com.morihacky.android.icobutton.IcoButton>
 
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <com.morihacky.android.icobutton.IcoButton
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            icobutton:txt="Button 1"
+            icobutton:drawable="@android:drawable/stat_sys_warning"
+            icobutton:iconAlign="right"
+            android:layout_margin="4dp"/>
+
+        <com.morihacky.android.icobutton.IcoButton
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            icobutton:txt="Button 2"
+            icobutton:txtAllCaps="true"
+            icobutton:drawable="@android:drawable/stat_sys_warning"
+            icobutton:iconAlign="right"
+            android:layout_margin="4dp"/>
+
+    </LinearLayout>
+
 </LinearLayout>

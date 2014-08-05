@@ -101,7 +101,7 @@ public class IcoButton
         int mode = MeasureSpec.getMode(widthMeasureSpec);
         switch (mode) {
             case MeasureSpec.EXACTLY:
-                totalWidth = MeasureSpec.getMode(widthMeasureSpec);
+                totalWidth = MeasureSpec.getSize(widthMeasureSpec);
                 break;
             default:
                 totalWidth = 2 * _hpadding + _spacingBtwIconAndText + _btnIcon.getMeasuredWidth() +

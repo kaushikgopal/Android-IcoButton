@@ -3,8 +3,10 @@
     <declare-styleable name="IcoButton">
         <attr name="drawable" format="integer"/>
         <attr name="color" format="color"/>
+
         <attr name="hpadding" format="dimension"/>
         <attr name="vpadding" format="dimension"/>
+        <attr name="spacingBtwIcoAndTxt" format="dimension"/>
 
         <attr name="iconAlign" format="enum">
             <enum name="leftOfText" value="0"/>

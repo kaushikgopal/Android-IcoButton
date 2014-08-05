@@ -38,8 +38,8 @@ public class IcoButton
     private ImageView _btnIcon;
     private IcoButtonViewHelper _icoViewHelper;
 
-    private int _icoDirection;
-    private int _hpadding, _vpadding;
+    private int _hpadding;
+    private int _spacingBtwIconAndText;
 
     public IcoButton(Context context) {
         super(context);
@@ -61,6 +61,9 @@ public class IcoButton
         _initializeView();
     }
 
+    // -----------------------------------------------------------------------
+    // public API
+
     public void setText(String text) {
         _btnText.setText(text);
     }
@@ -69,35 +72,52 @@ public class IcoButton
         _btnIcon.setImageDrawable(icon);
     }
 
+    // -----------------------------------------------------------------------
+    // Custom ViewGroup implementation
+
+    /**
+     * This method helps the app understand the precise dimensions of this view
+     * including any child views.
+     *
+     * This is done by:
+     * 1. specifying dimensions of each child view (measureChild)
+     * 2. calculating the overall dimensions by adding up the child view dimensions + padding (as Android expects every individual view to control its padding)
+     * 3. setting the overall dimensions (setMeasureDimension)
+     *
+     * @param widthMeasureSpec  packed data that gives us two attributes(mode & size) for the width of this whole view
+     * @param heightMeasureSpec packed data that gives us two attributes(mode & size) for the height of this whole view
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         _checkForNestedXmlViews();
 
+        // 1. -------------------------------------------------------------------------------------------
+        // measureChild measures the view thus allowing us to get individual heights/widths from the children
         measureChild(_btnIcon, widthMeasureSpec, heightMeasureSpec);
         measureChild(_btnText, widthMeasureSpec, heightMeasureSpec);
 
-        final int totalWidth = MeasureSpec.getSize(widthMeasureSpec);
+        // 2. -------------------------------------------------------------------------------------------
+        final int totalWidth = MeasureSpec.getMode(widthMeasureSpec);
         final int totalHeight = Math.max(_btnIcon.getMeasuredHeight(), _btnText.getMeasuredHeight()) +
                                 getPaddingTop() +
                                 getPaddingBottom();
 
+        // 3. -------------------------------------------------------------------------------------------
         setMeasuredDimension(totalWidth, totalHeight);
     }
 
+    /**
+     * This method helps the app understand how to layout each child in the view
+     * given the dimensions from {@link #onMeasure(int, int)}
+     */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         if (changed) {
-            _btnIcon.setAdjustViewBounds(true);
-            _btnIcon.setMaxHeight(_btnText.getMeasuredHeight());
-
             _icoViewHelper.setTotalWidth(getMeasuredWidth());
             _icoViewHelper.setTotalHeight(getMeasuredHeight());
-            _icoViewHelper.setHorizontalPadding(_hpadding);
-            _icoViewHelper.setVerticalPadding(_vpadding);
 
             _icoViewHelper.setIcoWidth(_btnIcon.getMeasuredWidth());
             _icoViewHelper.setTextHeight(_btnText.getMeasuredHeight());
-            _icoViewHelper.setIcoAlign(_icoDirection);
         }
         _icoViewHelper.setTextWidth(_btnText.getMeasuredWidth());
 
@@ -118,6 +138,9 @@ public class IcoButton
     public boolean shouldDelayChildPressedState() {
         return false;
     }
+
+    // -----------------------------------------------------------------------
+    // private helpers
 
     private void _checkForNestedXmlViews() {
         // No nested views
@@ -193,16 +216,20 @@ public class IcoButton
         int color = xmlAttrs.getColor(R.styleable.IcoButton_color, Color.parseColor(HOLO_BLUE));
         _btn.setBackgroundDrawable(_getStateListDrawableForButtonColor(color, true));
 
+        _icoViewHelper.setIcoAlign(xmlAttrs.getInt(R.styleable.IcoButton_iconAlign,
+                                                   ICON_ALIGN_LEFT_OF_TEXT));
+
         _hpadding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_hpadding,
                                                    _convertDpToPixels(10));
-        _vpadding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_vpadding,
-                                                   _convertDpToPixels(10));
-        _btn.setPadding(_hpadding, _vpadding, _hpadding, _vpadding);
-    }
+        _icoViewHelper.setHorizontalPadding(_hpadding);
 
-    private void _setupButtonIcon(TypedArray xmlAttrs) {
-        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
-        _icoDirection = xmlAttrs.getInt(R.styleable.IcoButton_iconAlign, ICON_ALIGN_LEFT_OF_TEXT);
+        int vpadding = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_vpadding,
+                                                      _convertDpToPixels(10));
+        _btn.setPadding(_hpadding, vpadding, _hpadding, vpadding);
+
+        _spacingBtwIconAndText = xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_spacingBtwIcoAndTxt,
+                                                                10);
+        _icoViewHelper.setSpacingBtwIconAndText(_spacingBtwIconAndText);
     }
 
     private void _setupButtonText(TypedArray xmlAttrs) {
@@ -218,6 +245,13 @@ public class IcoButton
         _btnText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                              xmlAttrs.getDimensionPixelSize(R.styleable.IcoButton_txtSize,
                                                             _convertDpToPixels(16)));
+    }
+
+    private void _setupButtonIcon(TypedArray xmlAttrs) {
+        _btnIcon.setAdjustViewBounds(true);
+        _btnIcon.setMaxHeight((int) (_btnText.getTextSize() * 1.2)); // TODO: parametrize this
+
+        _btnIcon.setImageDrawable(xmlAttrs.getDrawable(R.styleable.IcoButton_drawable));
     }
 
     private StateListDrawable _getStateListDrawableForButtonColor(int buttonColor, boolean darken) {

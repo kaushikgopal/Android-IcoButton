@@ -20,7 +20,7 @@ public class IcoButtonViewHelperTest {
         _ico.setTotalWidth(500);
         _ico.setTotalHeight(60);
         _ico.setHorizontalPadding(10);
-        _ico.setVerticalPadding(10);
+        _ico.setSpacingBtwIconAndText(10); // TODO: change this to a value other than 10
 
         _ico.setIcoWidth(30);
         _ico.setTextHeight(30);
@@ -52,7 +52,7 @@ public class IcoButtonViewHelperTest {
        |                                                                     |                              |
        |_____________________________________________________________________|                              |
                                                                                                            ---
-                      |-- 30 --| |-10-||------- 100 --------|
+                      |-- 30 --| |-15-||------- 100 --------|
        |----  180 ----|                                      |----  180 ----|
 */
 
@@ -84,7 +84,7 @@ public class IcoButtonViewHelperTest {
            |                                                                   |                              |
            |___________________________________________________________________|                              |
                                                                                                              ---
-                           |------- 100 --------||-10-||-- 30 --|
+                           |------- 100 --------||-15-||-- 30 --|
 
            |----  180 ----|                                      |----  180 ----|
     */
@@ -118,7 +118,7 @@ public class IcoButtonViewHelperTest {
      |_________________________________________________|                    |
                                                                            ---
          |-- 30 --|          |---- 100 ----|
-     |10|         |10|                              |10|
+     |10|         |15|                              |10|
                      |--170--|             |--170--|
 */
     @Test
@@ -164,7 +164,7 @@ public class IcoButtonViewHelperTest {
        |____________________________________________________|                    |
                                                                                 ---
                    |---- 100 ----|             |-- 30 --|
-       |10|                                |10|         |10|
+       |10|                                |15|         |10|
 
            |--170--|              |--170--|
 */

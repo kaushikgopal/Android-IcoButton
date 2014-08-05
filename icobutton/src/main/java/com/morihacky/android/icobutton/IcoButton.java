@@ -97,7 +97,16 @@ public class IcoButton
         measureChild(_btnText, widthMeasureSpec, heightMeasureSpec);
 
         // 2. -------------------------------------------------------------------------------------------
-        final int totalWidth = MeasureSpec.getMode(widthMeasureSpec);
+        int totalWidth;
+        int mode = MeasureSpec.getMode(widthMeasureSpec);
+        switch (mode) {
+            case MeasureSpec.EXACTLY:
+                totalWidth = MeasureSpec.getMode(widthMeasureSpec);
+                break;
+            default:
+                totalWidth = 2 * _hpadding + _spacingBtwIconAndText + _btnIcon.getMeasuredWidth() +
+                             _btnText.getMeasuredWidth();
+        }
         final int totalHeight = Math.max(_btnIcon.getMeasuredHeight(), _btnText.getMeasuredHeight()) +
                                 getPaddingTop() +
                                 getPaddingBottom();

@@ -1,6 +1,8 @@
 Android-IcoButton
 =================
 
+[DEPRECATED: I have since started using and contributing to [pnc IconButton](https://github.com/pnc/IconButton) lib. Use that instead]
+
 An Android Button widget that sensibly aligns your icon and text.
 
 ## Features
